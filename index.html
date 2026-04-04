@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="中野 真熙 - AI×Web開発×業務設計×研修講師のプロダクトエンジニア。企画から実装・運用まで一気通貫で対応。">
+  <meta name="author" content="Masaki Nakano">
+  <title>Masaki Nakano | AI × Web Developer × Instructor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== CSS CUSTOM PROPERTIES ===== */
+    :root {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-card: #1e293b;
+      --bg-card-hover: #263347;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --accent-light: rgba(59, 130, 246, 0.15);
+      --accent-border: rgba(59, 130, 246, 0.3);
+      --border: rgba(255,255,255,0.08);
+      --border-strong: rgba(255,255,255,0.15);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.3), 0 2px 4px rgba(0,0,0,0.2);
+      --shadow-lg: 0 10px 25px rgba(0,0,0,0.4), 0 4px 10px rgba(0,0,0,0.3);
+      --shadow-xl: 0 20px 40px rgba(0,0,0,0.5), 0 8px 16px rgba(0,0,0,0.3);
+      --radius-sm: 3px;
+      --radius: 5px;
+      --radius-lg: 6px;
+      --nav-height: 64px;
+      --transition: 0.25s ease;
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #f1f5f9;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f8fafc;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --accent-light: rgba(37, 99, 235, 0.1);
+      --accent-border: rgba(37, 99, 235, 0.25);
+      --border: rgba(0,0,0,0.08);
+      --border-strong: rgba(0,0,0,0.15);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.05);
+      --shadow-lg: 0 10px 25px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.06);
+      --shadow-xl: 0 20px 40px rgba(0,0,0,0.12), 0 8px 16px rgba(0,0,0,0.08);
+    }
+
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Inter', 'Noto Sans JP', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
+      transition: background-color var(--transition), color var(--transition);
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+
+    /* ===== SCROLL REVEAL ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ===== NAVIGATION ===== */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-height);
+      z-index: 1000;
+      transition: background-color var(--transition), backdrop-filter var(--transition), border-color var(--transition);
+    }
+
+    .nav.scrolled {
+      background-color: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    [data-theme="light"] .nav.scrolled {
+      background-color: rgba(248, 250, 252, 0.85);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .nav-logo {
+      font-size: 1.125rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      white-space: nowrap;
+    }
+
+    .nav-logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: color var(--transition);
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover { color: var(--text-primary); }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .theme-toggle {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition);
+    }
+
+    .theme-toggle:hover {
+      background: var(--bg-card-hover);
+      color: var(--text-primary);
+      border-color: var(--border-strong);
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-size: 1.2rem;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition);
+    }
+
+    .hamburger:hover {
+      border-color: var(--border-strong);
+      color: var(--text-primary);
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: var(--nav-height);
+      left: 0; right: 0;
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      z-index: 999;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      padding: 12px 0;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+      transition: color var(--transition);
+    }
+
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: var(--text-primary); }
+
+    /* ===== SECTION COMMON ===== */
+    section {
+      padding: 96px 24px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 640px;
+    }
+
+    .section-header {
+      margin-bottom: 64px;
+    }
+
+    /* ===== HERO ===== */
+    #hero {
+      min-height: 100vh;
+      padding-top: calc(var(--nav-height) + 64px);
+      padding-bottom: 96px;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-light);
+      border: 1px solid var(--accent-border);
+      padding: 6px 14px;
+      border-radius: var(--radius);
+      margin-bottom: 24px;
+    }
+
+    .hero-name {
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.0;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .hero-name-en {
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      font-weight: 400;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      margin-bottom: 24px;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .badge {
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid;
+      white-space: nowrap;
+    }
+
+    .badge-blue {
+      color: #60a5fa;
+      border-color: rgba(96, 165, 250, 0.3);
+      background: rgba(96, 165, 250, 0.08);
+    }
+
+    .badge-green {
+      color: #4ade80;
+      border-color: rgba(74, 222, 128, 0.3);
+      background: rgba(74, 222, 128, 0.08);
+    }
+
+    .badge-purple {
+      color: #c084fc;
+      border-color: rgba(192, 132, 252, 0.3);
+      background: rgba(192, 132, 252, 0.08);
+    }
+
+    .badge-orange {
+      color: #fb923c;
+      border-color: rgba(251, 146, 60, 0.3);
+      background: rgba(251, 146, 60, 0.08);
+    }
+
+    .hero-tagline {
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      font-weight: 400;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 40px;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 28px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: all var(--transition);
+      border: none;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(59, 130, 246, 0.35);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--border-strong);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-card);
+      border-color: var(--accent-border);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .hero-photo-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-photo-frame {
+      position: relative;
+      width: min(400px, 100%);
+    }
+
+    .hero-photo-frame::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      background: linear-gradient(135deg, var(--accent), transparent 60%);
+      border-radius: var(--radius-lg);
+      z-index: 0;
+    }
+
+    .hero-photo-frame img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border-radius: var(--radius);
+      background: var(--bg-secondary);
+    }
+
+    .hero-photo-frame .photo-placeholder {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: var(--bg-secondary);
+      border-radius: var(--radius);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .hero-photo-frame .photo-placeholder .icon {
+      font-size: 3rem;
+      margin-bottom: 8px;
+      opacity: 0.4;
+    }
+
+    /* ===== ABOUT ===== */
+    #about {
+      background: var(--bg-secondary);
+    }
+
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .about-bio {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.9;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      text-align: center;
+      transition: all var(--transition);
+    }
+
+    .stat-card:hover {
+      border-color: var(--accent-border);
+      box-shadow: var(--shadow-md);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+
+    /* ===== SERVICES ===== */
+    #services {
+      background: var(--bg-primary);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      transition: all var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transition: transform var(--transition);
+      transform-origin: left;
+    }
+
+    .service-card:hover::before { transform: scaleX(1); }
+
+    .service-card:hover {
+      border-color: var(--accent-border);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-3px);
+    }
+
+    .service-icon {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .service-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .service-desc {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    /* ===== PROJECTS ===== */
+    #projects {
+      background: var(--bg-secondary);
+    }
+
+    .filter-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 40px;
+    }
+
+    .filter-tab {
+      padding: 8px 18px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .filter-tab:hover {
+      border-color: var(--accent-border);
+      color: var(--accent);
+    }
+
+    .filter-tab.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      transition: all var(--transition);
+      position: relative;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent-border);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
+    }
+
+    .project-card.hidden {
+      display: none;
+    }
+
+    .project-card.filtered-out {
+      display: none;
+    }
+
+    .project-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .project-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+    }
+
+    .cat-badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: var(--radius-sm);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .cat-AI { color: #60a5fa; background: rgba(96,165,250,0.12); }
+    .cat-SaaS { color: #4ade80; background: rgba(74,222,128,0.12); }
+    .cat-auto { color: #fb923c; background: rgba(251,146,60,0.12); }
+    .cat-edu { color: #c084fc; background: rgba(192,132,252,0.12); }
+    .cat-other { color: #94a3b8; background: rgba(148,163,184,0.12); }
+
+    .project-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 16px;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: var(--radius-sm);
+      background: var(--accent-light);
+      color: var(--accent);
+      border: 1px solid var(--accent-border);
+    }
+
+    .show-more-wrapper {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    /* ===== TECH STACK ===== */
+    #techstack {
+      background: var(--bg-primary);
+    }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .tech-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      transition: all var(--transition);
+    }
+
+    .tech-card:hover {
+      border-color: var(--accent-border);
+      box-shadow: var(--shadow-md);
+    }
+
+    .tech-category {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .tech-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tech-item {
+      font-size: 0.82rem;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      transition: all var(--transition);
+    }
+
+    .tech-item:hover {
+      border-color: var(--accent-border);
+      color: var(--accent);
+    }
+
+    /* ===== INSTRUCTOR ===== */
+    #instructor {
+      background: var(--bg-secondary);
+    }
+
+    .instructor-inner {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .instructor-photo-wrapper {
+      position: sticky;
+      top: calc(var(--nav-height) + 24px);
+    }
+
+    .instructor-photo-frame {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .instructor-photo-frame img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      background: var(--bg-card);
+      display: block;
+    }
+
+    .instructor-photo-frame .photo-placeholder {
+      width: 100%;
+      aspect-ratio: 4/5;
+      background: var(--bg-card);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .instructor-photo-frame .photo-placeholder .icon {
+      font-size: 3rem;
+      margin-bottom: 8px;
+      opacity: 0.4;
+    }
+
+    .instructor-content {}
+
+    .instructor-name {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 6px;
+    }
+
+    .instructor-title {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 4px;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    .instructor-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    .instructor-tagline {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent);
+      padding: 14px 20px;
+      background: var(--accent-light);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin-bottom: 32px;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    .instructor-features {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      transition: all var(--transition);
+    }
+
+    .feature-card:hover {
+      border-color: var(--accent-border);
+    }
+
+    .feature-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .feature-title::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 1px;
+      flex-shrink: 0;
+    }
+
+    .feature-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    .instructor-domains {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .domain-tag {
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+
+    /* ===== CONTACT ===== */
+    #contact {
+      background: var(--bg-primary);
+    }
+
+    .contact-card {
+      max-width: 720px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 56px 48px;
+      text-align: center;
+      box-shadow: var(--shadow-xl);
+    }
+
+    .contact-message {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 24px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: all var(--transition);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .contact-link:hover {
+      border-color: var(--accent-border);
+      color: var(--accent);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-1px);
+    }
+
+    .contact-link-icon {
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .contact-link-text {
+      flex: 1;
+      text-align: left;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      padding: 40px 24px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-copy {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      transition: color var(--transition);
+    }
+
+    .footer-links a:hover { color: var(--text-secondary); }
+
+    /* ===== FEATURED DOT ===== */
+    .project-card.featured-card {
+      border-color: var(--accent-border);
+    }
+
+    .featured-dot {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .hero-photo-wrapper {
+        order: -1;
+      }
+
+      .hero-photo-frame {
+        width: min(280px, 100%);
+        margin: 0 auto;
+      }
+
+      .about-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .instructor-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .instructor-photo-wrapper {
+        position: static;
+        max-width: 300px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      section { padding: 72px 20px; }
+
+      .nav-links { display: none; }
+
+      .hamburger { display: flex; }
+
+      .hero-name { font-size: clamp(2.5rem, 10vw, 4rem); }
+
+      .contact-card { padding: 40px 24px; }
+
+      .footer-inner { flex-direction: column; text-align: center; }
+
+      .footer-links { justify-content: center; }
+    }
+
+    @media (max-width: 480px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .tech-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .hero-cta { flex-direction: column; }
+      .hero-cta .btn { text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">Masaki <span>Nakano</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#techstack">Tech Stack</a></li>
+      <li><a href="#instructor">Instructor</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="テーマ切り替え">☀</button>
+      <button class="hamburger" id="hamburger" aria-label="メニュー">☰</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMobileMenu()">About</a>
+  <a href="#services" onclick="closeMobileMenu()">Services</a>
+  <a href="#projects" onclick="closeMobileMenu()">Projects</a>
+  <a href="#techstack" onclick="closeMobileMenu()">Tech Stack</a>
+  <a href="#instructor" onclick="closeMobileMenu()">Instructor</a>
+  <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-eyebrow reveal">
+          <span>Available for Projects</span>
+        </div>
+        <h1 class="hero-name reveal reveal-delay-1">中野 真熙</h1>
+        <p class="hero-name-en reveal reveal-delay-1">Masaki Nakano</p>
+        <div class="hero-badges reveal reveal-delay-2">
+          <span class="badge badge-blue">AI活用</span>
+          <span class="badge badge-green">Web開発</span>
+          <span class="badge badge-purple">業務設計</span>
+          <span class="badge badge-orange">研修講師</span>
+        </div>
+        <p class="hero-tagline reveal reveal-delay-3">
+          構想を、動くプロダクトに。<br>業務を、仕組みに。<br>人を、自走する状態に。
+        </p>
+        <div class="hero-cta reveal reveal-delay-4">
+          <a href="#projects" class="btn btn-primary">実績を見る</a>
+          <a href="#contact" class="btn btn-secondary">お問い合わせ</a>
+        </div>
+      </div>
+      <div class="hero-photo-wrapper reveal reveal-delay-2">
+        <div class="hero-photo-frame">
+          <img src="./assets/profile-photo.jpg" alt="中野 真熙" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="photo-placeholder" style="display:none;">
+            <div class="icon">👤</div>
+            <span>profile-photo.jpg</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-label">About</p>
+      <h2 class="section-title">プロフィール</h2>
+    </div>
+    <div class="about-inner">
+      <div>
+        <p class="about-bio reveal">
+          AI×Web開発×業務設計を一気通貫で担うプロダクトエンジニア兼研修講師。企画・要件定義から設計・実装・運用まで一人で対応。法令チェックや承認ワークフローなど、曖昧な業務ルールをシステムに落とし込む力を強みとする。研修では「聞いて終わり」ではなく、現場で再現できる行動に落とし込むことを最優先に設計。
+        </p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card reveal reveal-delay-1">
+          <div class="stat-number">36+</div>
+          <div class="stat-label">Projects</div>
+        </div>
+        <div class="stat-card reveal reveal-delay-2">
+          <div class="stat-number">5+</div>
+          <div class="stat-label">Domains</div>
+        </div>
+        <div class="stat-card reveal reveal-delay-3">
+          <div class="stat-number">3+</div>
+          <div class="stat-label">Years Exp.</div>
+        </div>
+        <div class="stat-card reveal reveal-delay-4">
+          <div class="stat-number">AI×</div>
+          <div class="stat-label">Full-Stack</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section id="services">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-label">Services</p>
+      <h2 class="section-title">提供できること</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon">🤖</div>
+        <h3 class="service-title">AI活用プロダクト開発</h3>
+        <p class="service-desc">LLMを業務フローに組み込み、価値を出す実装。複数モデルの使い分けとプロンプト設計から実装まで一貫して担当。</p>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon">⚡</div>
+        <h3 class="service-title">フルスタック開発</h3>
+        <p class="service-desc">フロント・バックエンド・DB・インフラまで一人で完結。スタートアップのMVP高速構築から既存システムの改善まで対応。</p>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-icon">🔄</div>
+        <h3 class="service-title">業務自動化・DX推進</h3>
+        <p class="service-desc">API連携、ワークフロー構築、定型業務のシステム化で運用コスト削減。曖昧なルールをシステムに落とし込む設計が得意。</p>
+      </div>
+      <div class="service-card reveal reveal-delay-4">
+        <div class="service-icon">🎓</div>
+        <h3 class="service-title">研修・教育</h3>
+        <p class="service-desc">プログラミング教育からAI活用研修まで。「聞いて終わり」にならない実践型設計で、現場で使える行動変容を生む指導。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROJECTS ===== -->
+<section id="projects">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-label">Projects</p>
+      <h2 class="section-title">制作実績</h2>
+      <p class="section-subtitle">企画・要件定義から実装・運用まで一人で担当したプロダクト群</p>
+    </div>
+
+    <div class="filter-tabs reveal" id="filterTabs">
+      <button class="filter-tab active" data-cat="all">All</button>
+      <button class="filter-tab" data-cat="AI活用">AI活用</button>
+      <button class="filter-tab" data-cat="SaaS">SaaS</button>
+      <button class="filter-tab" data-cat="業務自動化">業務自動化</button>
+      <button class="filter-tab" data-cat="教育">教育</button>
+      <button class="filter-tab" data-cat="その他">その他</button>
+    </div>
+
+    <div class="projects-grid" id="projectsGrid">
+      <!-- Rendered by JS -->
+    </div>
+
+    <div class="show-more-wrapper reveal" id="showMoreWrapper">
+      <button class="btn btn-secondary" id="showMoreBtn">もっと見る</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TECH STACK ===== -->
+<section id="techstack">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-label">Tech Stack</p>
+      <h2 class="section-title">技術スタック</h2>
+    </div>
+    <div class="tech-grid">
+      <div class="tech-card reveal reveal-delay-1">
+        <div class="tech-category">言語</div>
+        <div class="tech-items">
+          <span class="tech-item">TypeScript</span>
+          <span class="tech-item">JavaScript</span>
+          <span class="tech-item">Python</span>
+          <span class="tech-item">PHP</span>
+          <span class="tech-item">Swift</span>
+        </div>
+      </div>
+      <div class="tech-card reveal reveal-delay-2">
+        <div class="tech-category">フロントエンド</div>
+        <div class="tech-items">
+          <span class="tech-item">React 18/19</span>
+          <span class="tech-item">Next.js 14/15</span>
+          <span class="tech-item">TailwindCSS</span>
+          <span class="tech-item">Vite</span>
+        </div>
+      </div>
+      <div class="tech-card reveal reveal-delay-3">
+        <div class="tech-category">バックエンド</div>
+        <div class="tech-items">
+          <span class="tech-item">Node.js</span>
+          <span class="tech-item">NestJS</span>
+          <span class="tech-item">FastAPI</span>
+          <span class="tech-item">Express.js</span>
+        </div>
+      </div>
+      <div class="tech-card reveal reveal-delay-4">
+        <div class="tech-category">データベース</div>
+        <div class="tech-items">
+          <span class="tech-item">PostgreSQL</span>
+          <span class="tech-item">MySQL</span>
+          <span class="tech-item">Supabase</span>
+          <span class="tech-item">Prisma</span>
+        </div>
+      </div>
+      <div class="tech-card reveal reveal-delay-1">
+        <div class="tech-category">AI / LLM</div>
+        <div class="tech-items">
+          <span class="tech-item">Claude AI</span>
+          <span class="tech-item">OpenAI API</span>
+          <span class="tech-item">Gemini</span>
+          <span class="tech-item">MCP</span>
+          <span class="tech-item">Whisper</span>
+        </div>
+      </div>
+      <div class="tech-card reveal reveal-delay-2">
+        <div class="tech-category">インフラ</div>
+        <div class="tech-items">
+          <span class="tech-item">Docker</span>
+          <span class="tech-item">Temporal</span>
+          <span class="tech-item">MinIO</span>
+          <span class="tech-item">Netlify</span>
+          <span class="tech-item">Cloudflare</span>
+        </div>
+      </div>
+      <div class="tech-card reveal reveal-delay-3">
+        <div class="tech-category">リアルタイム</div>
+        <div class="tech-items">
+          <span class="tech-item">WebSocket</span>
+          <span class="tech-item">Socket.IO</span>
+          <span class="tech-item">Redis</span>
+        </div>
+      </div>
+      <div class="tech-card reveal reveal-delay-4">
+        <div class="tech-category">自動化</div>
+        <div class="tech-items">
+          <span class="tech-item">Claude Code</span>
+          <span class="tech-item">Codex CLI</span>
+          <span class="tech-item">Turborepo</span>
+          <span class="tech-item">Playwright</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== INSTRUCTOR ===== -->
+<section id="instructor">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-label">Instructor</p>
+      <h2 class="section-title">研修講師としての活動</h2>
+    </div>
+    <div class="instructor-inner">
+      <div class="instructor-photo-wrapper reveal">
+        <div class="instructor-photo-frame">
+          <img src="./assets/profile.jpg" alt="研修講師 中野 真熙" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="photo-placeholder" style="display:none;">
+            <div class="icon">🎓</div>
+            <span>profile.jpg</span>
+          </div>
+        </div>
+      </div>
+      <div class="instructor-content">
+        <h3 class="instructor-name reveal">中野 真熙</h3>
+        <p class="instructor-title reveal reveal-delay-1">研修講師 ／ 教育コンテンツプロデューサー ／ プログラミングスクール教室長</p>
+        <p class="instructor-subtitle reveal reveal-delay-1">（SaaSセールス・営業マネジメント）</p>
+        <p class="instructor-tagline reveal reveal-delay-2">
+          ロジカルとパッションを両立した [営業×教育×AI活用] の指導が得意
+        </p>
+        <div class="instructor-features">
+          <div class="feature-card reveal reveal-delay-2">
+            <div class="feature-title">再現可能な行動設計</div>
+            <p class="feature-desc">「聞いて終わり」ではなく、現場で再現できる行動に落とし込むことを最優先に設計。ゴール設定→実践手順→振り返りまでを一本化。</p>
+          </div>
+          <div class="feature-card reveal reveal-delay-3">
+            <div class="feature-title">主体性を引き出す設計</div>
+            <p class="feature-desc">達成感が出る課題設計、進捗の可視化、小さな成功体験の積み上げで受講者が自走できる状態へつなげる。</p>
+          </div>
+          <div class="feature-card reveal reveal-delay-4">
+            <div class="feature-title">初学者指導に自信あり</div>
+            <p class="feature-desc">プログラミングスクール教室長として専門用語を噛み砕き、「例→デモ→演習→フィードバック」の流れで躓きを残さない指導を実践。</p>
+          </div>
+        </div>
+        <div>
+          <p class="section-label" style="margin-bottom: 14px;">研修対応領域</p>
+          <div class="instructor-domains reveal">
+            <span class="domain-tag">新入社員研修</span>
+            <span class="domain-tag">プログラミング基礎</span>
+            <span class="domain-tag">AI活用研修</span>
+            <span class="domain-tag">営業力強化</span>
+            <span class="domain-tag">マネジメント研修</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header reveal" style="text-align: center;">
+      <p class="section-label">Contact</p>
+      <h2 class="section-title">お問い合わせ</h2>
+    </div>
+    <div class="contact-card reveal">
+      <p class="contact-message">お仕事のご相談・ご依頼はお気軽にご連絡ください</p>
+      <div class="contact-links">
+        <a href="mailto:masaki.kozinn@gmail.com" class="contact-link">
+          <span class="contact-link-icon">✉</span>
+          <span class="contact-link-text">masaki.kozinn@gmail.com</span>
+          <span style="color: var(--text-muted); font-size: 0.8rem;">Email</span>
+        </a>
+        <a href="https://github.com/masaki-sigoto" target="_blank" rel="noopener noreferrer" class="contact-link">
+          <span class="contact-link-icon">&#9670;</span>
+          <span class="contact-link-text">github.com/masaki-sigoto</span>
+          <span style="color: var(--text-muted); font-size: 0.8rem;">GitHub</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-inner">
+    <p class="footer-copy">© 2026 Masaki Nakano. All rights reserved.</p>
+    <nav class="footer-links">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function() {
+  'use strict';
+
+  // ===== PROJECTS DATA =====
+  var PROJECTS = [
+    { name: 'Recruitment Studio', desc: 'AIによる求人票自動生成・法令チェック・フォーマット変換を統合したMonorepo型SaaS', tags: ['Next.js 15','Supabase','Claude AI','Turborepo'], cat: 'AI活用', featured: true },
+    { name: 'CrossBot', desc: 'ビジュアルシナリオエディタでBot構築からリアルタイム有人エスカレーションまで統合するSaaS', tags: ['React 18','NestJS','Socket.IO','Redis','Docker'], cat: 'SaaS', featured: true },
+    { name: 'cross2B-Pro', desc: 'Temporal Workflowsで構築した19ステップのSEO記事完全自動生成パイプライン', tags: ['FastAPI','Temporal','Next.js 14','PostgreSQL'], cat: 'AI活用', featured: true },
+    { name: 'タスク承認カレンダー', desc: 'Google Calendar複数アカウント+外部サービス統合のタスク管理ツール', tags: ['React 18','Google Calendar API','Gmail API'], cat: '業務自動化', featured: false },
+    { name: '求人票ブラッシュアップツール', desc: 'Claude AIが求人票テキストを構造化分析し品質スコアリング・改善提案・法令リスクを自動検出', tags: ['Next.js','Claude AI','TypeScript'], cat: 'AI活用', featured: false },
+    { name: 'OpenAI Codex MCP統合', desc: 'OpenAI Codex CLIをMCP準拠サーバーとしてラップ。Claude Code内からo3/o4系モデルを直接呼出', tags: ['Python','FastAPI','MCP'], cat: 'AI活用', featured: false },
+    { name: 'YourOS', desc: 'Claude Codeと連携する14個のスラッシュコマンドを備えた知識管理・タスク実行OS', tags: ['Claude Code','Python','YAML'], cat: 'AI活用', featured: false },
+    { name: '問い合わせ管理システム', desc: 'Webサイト問い合わせフォームの受付〜対応完了を一元管理するダッシュボード', tags: ['PHP 8.2','MySQL','Docker'], cat: 'SaaS', featured: false },
+    { name: 'NovaCalc', desc: 'Blockly統合のビジュアルプログラミング電卓。STEM教育向けインタラクティブアプリ', tags: ['React 19','Blockly','Vite'], cat: '教育', featured: false },
+    { name: 'WordPress自動設定・投稿ツール', desc: 'WordPress REST APIを活用したAI生成記事の自動投稿・カテゴリ管理ツール', tags: ['Node.js','WordPress REST API'], cat: '業務自動化', featured: false },
+    { name: '決算書・売上予測システム', desc: 'CSVベースの元データから月次集計・年間見込み・未来シミュレーションを自動生成', tags: ['Python','CSV','データ分析'], cat: '業務自動化', featured: false },
+    { name: 'クロスラーニング事業サイト', desc: 'ラーニング事業Webサイト構築。Anthropic API統合', tags: ['Express.js','Swiper','Anthropic API'], cat: 'その他', featured: false },
+    { name: '法令チェックエンジン', desc: '曖昧な労働法規をルールベース+AIでシステム化。求人票中の法令違反表現を自動検出', tags: ['TypeScript','Claude AI'], cat: 'AI活用', featured: false },
+    { name: 'ヒアリングフォーム自動生成', desc: 'AI対話型ヒアリングフォーム。回答内容をAIが構造化し求人票の下書きを自動生成', tags: ['Next.js 15','Supabase','Claude AI'], cat: 'AI活用', featured: false },
+    { name: 'フォーマット変換エンジン', desc: '統一フォーマットの求人票データを各求人媒体のフォーマットに自動変換するコンバーター', tags: ['TypeScript','JSON Schema'], cat: '業務自動化', featured: false },
+    { name: 'ビジュアルフロー編集UI', desc: 'XYFlowを活用したノード・エッジベースのビジュアルワークフロー編集機能', tags: ['XYFlow','React 18','TypeScript'], cat: 'SaaS', featured: false },
+    { name: '教育講座コンテンツ管理', desc: 'プログラミングスクール運営における教材・カリキュラムの体系化と配信管理', tags: ['Markdown','YAML'], cat: '教育', featured: false },
+    { name: '求人広告運用ダッシュボード', desc: '求人広告の出稿データ・応募数・費用対効果をダッシュボード化', tags: ['Python','データ分析','CSV'], cat: '業務自動化', featured: false },
+    { name: 'VS Code カスタムテーマ', desc: 'VS Code Marketplace向けカスタムカラーテーマの設計・公開', tags: ['VS Code Extension','JSON'], cat: 'その他', featured: false },
+    { name: 'StockSun面談用ポートフォリオ', desc: 'Three.js+GSAP+Lenisの単一HTMLポートフォリオ。5つのデザインパターンから最良要素を統合', tags: ['Three.js','GSAP','Lenis'], cat: 'その他', featured: false },
+    { name: '社内ナレッジ管理基盤', desc: 'SOP・意思決定ログ・プロジェクト知見をMarkdown+Git管理で体系化', tags: ['Markdown','Git','Claude Code'], cat: '業務自動化', featured: false },
+    { name: 'OpenClaw', desc: '自然言語でGoogleカレンダーの複数アカウントを横断操作するAIツール', tags: ['Python','Google Calendar API','Claude AI'], cat: 'AI活用', featured: false },
+    { name: 'ScreenVault', desc: 'macOS上のスクリーンショットをAIが自動分類・タグ付け・検索可能なアーカイブシステム', tags: ['Swift','CoreML','macOS'], cat: 'AI活用', featured: false },
+    { name: 'DoCare', desc: '救急・外来患者のトリアージ情報をリアルタイム可視化するダッシュボード', tags: ['React','Node.js','WebSocket'], cat: 'SaaS', featured: false },
+    { name: 'Claude Code マニュアル生成ツール', desc: 'Puppeteerでブラウザ操作をキャプチャし操作手順ドキュメントを自動生成', tags: ['Puppeteer','Node.js','PDF生成'], cat: '業務自動化', featured: false },
+    { name: 'AI会話ログ分析ツール', desc: 'AIとの会話ログを構造化分析しプロンプトの品質・改善ポイントを可視化', tags: ['Python','Claude AI','データ分析'], cat: 'AI活用', featured: false },
+    { name: '会社経営AI', desc: '経営データと市場情報をAIが統合分析し意思決定のシミュレーション・リスク評価を行う', tags: ['Python','Claude AI'], cat: 'AI活用', featured: false },
+    { name: '自動文字起こしシステム', desc: '会議・面談の音声データを自動でテキスト化し要約・議事録生成までパイプライン化', tags: ['Python','Whisper','Claude AI'], cat: 'AI活用', featured: false },
+    { name: '企業調査自動化ツール', desc: 'Webフォーム問い合わせの発信元企業情報をAIがスクレイピング+API連携で自動収集', tags: ['Python','スクレイピング','Claude AI'], cat: '業務自動化', featured: false },
+    { name: '麻雀スコア管理アプリ', desc: '麻雀のスコア管理・戦績分析をリアルタイムで行うWebアプリ', tags: ['React','Node.js','WebSocket'], cat: 'その他', featured: false },
+    { name: 'Virtual Office', desc: 'リモートワーク環境での在席管理・声かけ・ステータス共有を仮想オフィス空間で実現', tags: ['React','WebSocket','Canvas API'], cat: 'SaaS', featured: false },
+    { name: '地域別集計メール自動生成', desc: '地域別の実施後集計データからメール文面を自動生成する定型業務自動化ツール', tags: ['Python','テンプレートエンジン'], cat: '業務自動化', featured: false },
+    { name: 'AI記事ポータルサイト', desc: 'AIが生成した記事を分類・公開・SEO最適化するポータルサイト', tags: ['Next.js','Claude AI','SEO'], cat: 'AI活用', featured: false },
+    { name: 'キッズプログラミング教育コンテンツ', desc: '小学生がビジュアルプログラミングからテキストコーディングへ段階的に移行できる教材', tags: ['教育設計','Scratch'], cat: '教育', featured: false },
+    { name: 'AI研修ワークショップ設計', desc: '法人向けAI活用研修の企画からコンテンツ制作・講師運営まで一貫して担当', tags: ['研修設計','ChatGPT','Claude'], cat: '教育', featured: false },
+    { name: '大阪未来プロジェクト / nanbo-bot', desc: '大阪の都市課題・未来ビジョンについてAIが対話形式で情報提供するRAGチャットボット', tags: ['Next.js','Claude AI','RAG'], cat: 'AI活用', featured: false }
+  ];
+
+  var INITIAL_COUNT = 9;
+  var currentFilter = 'all';
+  var showAll = false;
+
+  // ===== THEME =====
+  var html = document.documentElement;
+  var themeBtn = document.getElementById('themeToggle');
+
+  function getTheme() {
+    return localStorage.getItem('theme') || 'dark';
+  }
+
+  function applyTheme(t) {
+    html.setAttribute('data-theme', t);
+    themeBtn.textContent = t === 'dark' ? '☀' : '☾';
+    localStorage.setItem('theme', t);
+  }
+
+  applyTheme(getTheme());
+
+  themeBtn.addEventListener('click', function() {
+    applyTheme(getTheme() === 'dark' ? 'light' : 'dark');
+  });
+
+  // ===== NAV SCROLL =====
+  var nav = document.getElementById('mainNav');
+
+  function handleNavScroll() {
+    if (window.scrollY > 40) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  }
+
+  window.addEventListener('scroll', handleNavScroll, { passive: true });
+  handleNavScroll();
+
+  // ===== HAMBURGER =====
+  var hamburger = document.getElementById('hamburger');
+  var mobileMenu = document.getElementById('mobileMenu');
+
+  hamburger.addEventListener('click', function() {
+    var isOpen = mobileMenu.classList.contains('open');
+    if (isOpen) {
+      mobileMenu.classList.remove('open');
+      hamburger.textContent = '☰';
+    } else {
+      mobileMenu.classList.add('open');
+      hamburger.textContent = '✕';
+    }
+  });
+
+  window.closeMobileMenu = function() {
+    mobileMenu.classList.remove('open');
+    hamburger.textContent = '☰';
+  };
+
+  // ===== CAT CLASS MAP =====
+  function getCatClass(cat) {
+    var map = {
+      'AI活用': 'cat-AI',
+      'SaaS': 'cat-SaaS',
+      '業務自動化': 'cat-auto',
+      '教育': 'cat-edu',
+      'その他': 'cat-other'
+    };
+    return map[cat] || 'cat-other';
+  }
+
+  // ===== RENDER PROJECTS =====
+  function renderProjects() {
+    var grid = document.getElementById('projectsGrid');
+    var showMoreWrapper = document.getElementById('showMoreWrapper');
+    var filteredProjects = currentFilter === 'all'
+      ? PROJECTS
+      : PROJECTS.filter(function(p) { return p.cat === currentFilter; });
+
+    grid.innerHTML = '';
+
+    filteredProjects.forEach(function(p, i) {
+      var card = document.createElement('div');
+      card.className = 'project-card reveal' + (p.featured ? ' featured-card' : '');
+
+      var isHidden = !showAll && i >= INITIAL_COUNT;
+      if (isHidden) card.classList.add('hidden');
+
+      var tagsHTML = p.tags.map(function(t) {
+        return '<span class="tag">' + escapeHTML(t) + '</span>';
+      }).join('');
+
+      card.innerHTML =
+        (p.featured ? '<div class="featured-dot"></div>' : '') +
+        '<div class="project-header">' +
+          '<h3 class="project-name">' + escapeHTML(p.name) + '</h3>' +
+          '<span class="cat-badge ' + getCatClass(p.cat) + '">' + escapeHTML(p.cat) + '</span>' +
+        '</div>' +
+        '<p class="project-desc">' + escapeHTML(p.desc) + '</p>' +
+        '<div class="project-tags">' + tagsHTML + '</div>';
+
+      grid.appendChild(card);
+
+      // stagger reveal
+      if (!isHidden) {
+        setTimeout(function(el) {
+          return function() { observeReveal(el); };
+        }(card), 50 * (i % 3));
+      }
+    });
+
+    // Show/hide "more" button
+    var hasMore = !showAll && filteredProjects.length > INITIAL_COUNT;
+    showMoreWrapper.style.display = hasMore ? 'block' : 'none';
+
+    // Re-observe all new cards
+    grid.querySelectorAll('.project-card:not(.hidden)').forEach(function(el) {
+      revealObserver.observe(el);
+    });
+  }
+
+  function escapeHTML(str) {
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  // ===== FILTER =====
+  var filterTabs = document.getElementById('filterTabs');
+  filterTabs.addEventListener('click', function(e) {
+    var btn = e.target.closest('.filter-tab');
+    if (!btn) return;
+    filterTabs.querySelectorAll('.filter-tab').forEach(function(t) {
+      t.classList.remove('active');
+    });
+    btn.classList.add('active');
+    currentFilter = btn.getAttribute('data-cat');
+    showAll = false;
+    renderProjects();
+  });
+
+  // ===== SHOW MORE =====
+  document.getElementById('showMoreBtn').addEventListener('click', function() {
+    showAll = true;
+    renderProjects();
+  });
+
+  // ===== INTERSECTION OBSERVER FOR REVEAL =====
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  function observeReveal(el) {
+    revealObserver.observe(el);
+  }
+
+  function initReveal() {
+    document.querySelectorAll('.reveal').forEach(function(el) {
+      revealObserver.observe(el);
+    });
+  }
+
+  // ===== INIT =====
+  renderProjects();
+  initReveal();
+
+})();
+</script>
+</body>
+</html>
