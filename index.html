@@ -512,6 +512,159 @@
       letter-spacing: 0.03em;
     }
 
+    /* ===== CAREER ===== */
+    #career {
+      padding: 100px 0;
+      background: var(--bg-primary);
+    }
+    .career-timeline {
+      position: relative;
+      padding-left: 32px;
+      margin-bottom: 48px;
+    }
+    .career-timeline::before {
+      content: '';
+      position: absolute;
+      left: 6px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: var(--border-strong);
+    }
+    .career-item {
+      position: relative;
+      margin-bottom: 32px;
+    }
+    .career-item:last-child { margin-bottom: 0; }
+    .career-item::before {
+      content: '';
+      position: absolute;
+      left: -32px;
+      top: 8px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--bg-primary);
+      border: 3px solid var(--accent);
+      z-index: 1;
+    }
+    .career-item:first-child::before {
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-light);
+    }
+    .career-period {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .career-date {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--accent);
+      font-family: 'Inter', sans-serif;
+    }
+    .career-badge {
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .career-badge-current {
+      background: var(--accent-light);
+      color: var(--accent);
+      border: 1px solid var(--accent-border);
+    }
+    .career-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md, 5px);
+      padding: 20px 24px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.3s, border-color 0.3s;
+    }
+    .career-card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: var(--border-strong);
+    }
+    .career-card-header {
+      margin-bottom: 10px;
+    }
+    .career-company {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0 0 4px;
+    }
+    .career-role {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--accent);
+    }
+    .career-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+    .career-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .career-tag {
+      font-size: 0.7rem;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 3px;
+      background: var(--accent-light);
+      color: var(--accent);
+      border: 1px solid var(--accent-border);
+    }
+    .career-footer {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 32px;
+      padding: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md, 5px);
+      box-shadow: var(--shadow-sm);
+    }
+    .career-footer-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    .career-footer-text {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+    .career-qual-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .career-qual-tag {
+      font-size: 0.72rem;
+      padding: 3px 10px;
+      border-radius: 3px;
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+    @media (max-width: 768px) {
+      .career-footer {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+
     /* ===== SERVICES ===== */
     #services {
       background: var(--bg-primary);
@@ -1076,6 +1229,7 @@
     <a href="#hero" class="nav-logo">Masaki <span>Nakano</span></a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
+      <li><a href="#career">Career</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#techstack">Tech Stack</a></li>
@@ -1092,6 +1246,7 @@
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
   <a href="#about" onclick="closeMobileMenu()">About</a>
+  <a href="#career" onclick="closeMobileMenu()">Career</a>
   <a href="#services" onclick="closeMobileMenu()">Services</a>
   <a href="#projects" onclick="closeMobileMenu()">Projects</a>
   <a href="#techstack" onclick="closeMobileMenu()">Tech Stack</a>
@@ -1165,6 +1320,135 @@
         <div class="stat-card reveal reveal-delay-4">
           <div class="stat-number">AI×</div>
           <div class="stat-label">Full-Stack</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CAREER ===== -->
+<section id="career">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-label">Career</p>
+      <h2 class="section-title">職務経歴</h2>
+    </div>
+
+    <div class="career-timeline">
+      <!-- Current: Independent -->
+      <div class="career-item reveal">
+        <div class="career-period">
+          <span class="career-date">2023/4 - 現在</span>
+          <span class="career-badge career-badge-current">現在</span>
+        </div>
+        <div class="career-card">
+          <div class="career-card-header">
+            <h3 class="career-company">独立（フリーランス）</h3>
+            <span class="career-role">AIエンジニア / フルスタック開発 / 研修講師</span>
+          </div>
+          <p class="career-desc">企業案件対応としてAI活用プロダクト開発、Web開発、業務自動化を手がける。並行して法人向け研修講師として新入社員研修・AI活用研修・プログラミング研修を担当。36件以上のプロダクト開発実績。</p>
+          <div class="career-tags">
+            <span class="career-tag">AI開発</span>
+            <span class="career-tag">フルスタック</span>
+            <span class="career-tag">研修講師</span>
+            <span class="career-tag">業務自動化</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Parallel: Programming School -->
+      <div class="career-item reveal reveal-delay-1">
+        <div class="career-period">
+          <span class="career-date">2021/4 - 現在</span>
+          <span class="career-badge career-badge-current">継続中</span>
+        </div>
+        <div class="career-card">
+          <div class="career-card-header">
+            <h3 class="career-company">小学生向けプログラミングスクール事業</h3>
+            <span class="career-role">スクール長 / 講師 / フランチャイズ運営</span>
+          </div>
+          <p class="career-desc">体験会営業・クロージング・入会促進から講師業務・スクール長・フランチャイズ運営まで一貫して担当。他の職務と並行して継続。</p>
+          <div class="career-tags">
+            <span class="career-tag">教育</span>
+            <span class="career-tag">スクール運営</span>
+            <span class="career-tag">営業</span>
+            <span class="career-tag">講師</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ikujikai -->
+      <div class="career-item reveal reveal-delay-2">
+        <div class="career-period">
+          <span class="career-date">2021/9 - 2023/3</span>
+        </div>
+        <div class="career-card">
+          <div class="career-card-header">
+            <h3 class="career-company">社会福祉法人 郁慈会</h3>
+            <span class="career-role">統括マネージャー</span>
+          </div>
+          <p class="career-desc">人材紹介事業・介護スクール事業の立ち上げを担当。官公庁折衝、事業許可申請、求人広告運用、営業チーム採用・育成を統括。紹介事業では開始3ヶ月で売上約178万円を達成。</p>
+          <div class="career-tags">
+            <span class="career-tag">新規事業立ち上げ</span>
+            <span class="career-tag">人材紹介</span>
+            <span class="career-tag">マネジメント</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cotorio -->
+      <div class="career-item reveal reveal-delay-3">
+        <div class="career-period">
+          <span class="career-date">2020/4 - 2021/8</span>
+        </div>
+        <div class="career-card">
+          <div class="career-card-header">
+            <h3 class="career-company">株式会社コトリオ</h3>
+            <span class="career-role">人材派遣営業</span>
+          </div>
+          <p class="career-desc">医療福祉介護領域の人材派遣営業。テレアポ・新規開拓からルート営業、登録人材の面談・フォローまで担当。月売上約1,300万円を達成。</p>
+          <div class="career-tags">
+            <span class="career-tag">法人営業</span>
+            <span class="career-tag">人材派遣</span>
+            <span class="career-tag">月売上1,300万</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RT Corporation / Din Tai Fung -->
+      <div class="career-item reveal reveal-delay-4">
+        <div class="career-period">
+          <span class="career-date">2013/4 - 2020/3</span>
+        </div>
+        <div class="career-card">
+          <div class="career-card-header">
+            <h3 class="career-company">株式会社RTコーポレーション（鼎泰豊）</h3>
+            <span class="career-role">本店調理長 → 関西副総料理長</span>
+          </div>
+          <p class="career-desc">外食産業にて調理・接客から店舗運営全般を担当。社員10名+アルバイト約50名のマネジメント、新商品開発、スタッフ教育を統括。月売上4,200万円（全国21店舗中3位・西日本1位）。</p>
+          <div class="career-tags">
+            <span class="career-tag">店舗マネジメント</span>
+            <span class="career-tag">月売上4,200万</span>
+            <span class="career-tag">60名統括</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Education & Qualifications -->
+    <div class="career-footer reveal">
+      <div class="career-footer-section">
+        <h4 class="career-footer-title">学歴</h4>
+        <p class="career-footer-text">大阪府立長野高等学校 卒業（2013年3月）</p>
+      </div>
+      <div class="career-footer-section">
+        <h4 class="career-footer-title">保有資格</h4>
+        <div class="career-qual-tags">
+          <span class="career-qual-tag">普通自動車免許</span>
+          <span class="career-qual-tag">調理師免許</span>
+          <span class="career-qual-tag">食品衛生責任者</span>
+          <span class="career-qual-tag">派遣元責任者</span>
+          <span class="career-qual-tag">職業紹介責任者</span>
         </div>
       </div>
     </div>
@@ -1401,6 +1685,7 @@
     <p class="footer-copy">© 2026 Masaki Nakano. All rights reserved.</p>
     <nav class="footer-links">
       <a href="#about">About</a>
+      <a href="#career">Career</a>
       <a href="#services">Services</a>
       <a href="#projects">Projects</a>
       <a href="#contact">Contact</a>
