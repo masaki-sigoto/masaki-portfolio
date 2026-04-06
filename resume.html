@@ -138,7 +138,7 @@
     }
 
     .header-portfolio a {
-      color: #a8c8ff;
+      color: #d4e4ff;
       text-decoration: underline;
     }
 
@@ -232,18 +232,28 @@
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 5px 8px;
+      gap: 6px;
     }
 
-    .skill-tag {
-      background: #f1f5f9;
-      border: 1px solid #cbd5e1;
-      border-radius: 4px;
-      padding: 4px 8px;
+    .skill-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-left: 3px solid #1a56db;
+      border-radius: 3px;
+      padding: 6px 10px;
+    }
+
+    .skill-card-title {
       font-size: 8.5pt;
-      font-weight: 500;
+      font-weight: 700;
       color: #1e293b;
-      text-align: center;
+      margin-bottom: 1px;
+    }
+
+    .skill-card-desc {
+      font-size: 7.5pt;
+      color: #64748b;
+      line-height: 1.5;
     }
 
     /* ===== Tech Stack ===== */
@@ -253,30 +263,35 @@
       line-height: 1.8;
     }
 
-    /* ===== Qualifications & Education ===== */
-    .simple-list {
-      font-size: 8.5pt;
-      color: #334155;
-      line-height: 1.7;
+    /* ===== Qualifications & Education Row ===== */
+    .qual-edu-row {
+      display: flex;
+      gap: 24px;
     }
 
-    .simple-list li {
-      padding-left: 10px;
-      position: relative;
+    .qual-edu-col {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 4px 6px;
     }
 
-    .simple-list li::before {
-      content: '・';
-      position: absolute;
-      left: 0;
-      color: #94a3b8;
+    .qual-edu-label {
+      font-size: 8pt;
+      font-weight: 700;
+      color: #1a56db;
+      margin-right: 6px;
+      white-space: nowrap;
     }
 
-    /* ===== Two Column Layout ===== */
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0 24px;
+    .qual-item {
+      font-size: 8pt;
+      color: #475569;
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      border-radius: 3px;
+      padding: 2px 8px;
+      white-space: nowrap;
     }
 
     /* ===== Footer ===== */
@@ -327,7 +342,7 @@
     <section class="section">
       <h2 class="section-title">職務要約</h2>
       <p class="summary-text">
-        外食産業での大型店舗運営・60名規模のマネジメントからキャリアをスタートし、人材派遣営業での法人営業・月売上1,300万円の実績を経て、新規事業の立ち上げ・スクール運営へ。現在はAIエンジニア・フルスタック開発者・研修講師として独立し、企業向けAI活用プロダクト開発から法人研修まで一気通貫で対応。営業・マネジメント・事業企画・開発・教育の全領域を実務で経験している点が強み。
+        外食産業での60名規模の店舗マネジメント（月売上4,200万円・西日本1位）を皮切りに、法人営業で月売上1,300万円を達成。その後、人材紹介事業・スクール事業を立ち上げ、プログラミングスクール教室長として教育事業にも従事。2023年に独立し、AIエンジニア・フルスタック開発者・研修講師として活動中。営業・マネジメント・事業企画・開発・教育を実務で横断してきた経験を活かし、「構想を動くプロダクトにする」ことを信条に、企業のDX推進・AI活用・人材育成を一気通貫で支援する。
       </p>
     </section>
 
@@ -378,7 +393,19 @@
         </ul>
       </div>
 
-      <!-- Career Block 4 -->
+    </section>
+
+    <div style="text-align:right; font-size:7pt; color:#cbd5e1; margin-top:auto;">1 / 2</div>
+
+  </div><!-- /page 1 -->
+
+  <!-- ========== PAGE 2 ========== -->
+  <div class="page page-break-before">
+
+    <!-- Career Block continued -->
+    <section class="section">
+      <h2 class="section-title">職務経歴（続き）</h2>
+
       <div class="career-block">
         <div class="career-period">2020年4月 — 2021年8月</div>
         <div class="career-company">株式会社コトリオ</div>
@@ -390,17 +417,6 @@
           <li>月売上約1,300万円（自力売上約1,000万円）を達成</li>
         </ul>
       </div>
-
-    </section>
-
-  </div><!-- /page 1 -->
-
-  <!-- ========== PAGE 2 ========== -->
-  <div class="page page-break-before">
-
-    <!-- Career Block 5 (continued) -->
-    <section class="section">
-      <h2 class="section-title">職務経歴（続き）</h2>
 
       <div class="career-block">
         <div class="career-period">2013年4月 — 2020年3月</div>
@@ -420,12 +436,30 @@
     <section class="section">
       <h2 class="section-title">対応領域・スキル</h2>
       <div class="skills-grid">
-        <div class="skill-tag">営業・提案</div>
-        <div class="skill-tag">マネジメント</div>
-        <div class="skill-tag">事業立ち上げ</div>
-        <div class="skill-tag">教育・研修</div>
-        <div class="skill-tag">AI開発</div>
-        <div class="skill-tag">Web開発（フルスタック）</div>
+        <div class="skill-card">
+          <div class="skill-card-title">営業・提案</div>
+          <div class="skill-card-desc">法人営業、新規開拓、提案書作成、クロージング</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card-title">マネジメント</div>
+          <div class="skill-card-desc">チーム統括、採用・育成、売上管理、KPI設計</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card-title">事業立ち上げ</div>
+          <div class="skill-card-desc">事業企画、許認可取得、官公庁折衝、収支設計</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card-title">教育・研修</div>
+          <div class="skill-card-desc">講師、カリキュラム設計、教材開発、受講者育成</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card-title">AI開発</div>
+          <div class="skill-card-desc">LLM統合、プロンプト設計、AI業務自動化、MCP</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card-title">Web開発</div>
+          <div class="skill-card-desc">フロント〜バックエンド〜DB〜インフラまで一人で完結</div>
+        </div>
       </div>
     </section>
 
@@ -438,25 +472,25 @@
     </section>
 
     <!-- 資格・学歴 -->
-    <div class="two-col">
-      <section class="section">
-        <h2 class="section-title">資格</h2>
-        <ul class="simple-list">
-          <li>普通自動車免許</li>
-          <li>調理師免許</li>
-          <li>食品衛生責任者</li>
-          <li>派遣元責任者</li>
-          <li>職業紹介責任者</li>
-        </ul>
-      </section>
+    <section class="section">
+      <h2 class="section-title">資格・学歴</h2>
+      <div class="qual-edu-row">
+        <div class="qual-edu-col">
+          <div class="qual-edu-label">資格</div>
+          <span class="qual-item">普通自動車免許</span>
+          <span class="qual-item">調理師免許</span>
+          <span class="qual-item">食品衛生責任者</span>
+          <span class="qual-item">派遣元責任者</span>
+          <span class="qual-item">職業紹介責任者</span>
+        </div>
+        <div class="qual-edu-col">
+          <div class="qual-edu-label">学歴</div>
+          <span class="qual-item">大阪府立長野高等学校 卒業（2013年3月）</span>
+        </div>
+      </div>
+    </section>
 
-      <section class="section">
-        <h2 class="section-title">学歴</h2>
-        <ul class="simple-list">
-          <li>大阪府立長野高等学校 卒業（2013年3月）</li>
-        </ul>
-      </section>
-    </div>
+    <div style="text-align:right; font-size:7pt; color:#cbd5e1; margin-top:8px;">2 / 2</div>
 
     <!-- Footer -->
     <footer class="resume-footer">
