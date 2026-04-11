@@ -1236,6 +1236,11 @@
   border-radius: 6px;
   overflow: hidden;
   box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
+.screenshot-card:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-strong);
 }
 .screenshot-card-header {
   padding: 0.8rem 1rem;
@@ -1258,6 +1263,30 @@
 .screenshot-card-sub {
   font-size: 0.7rem;
   color: var(--text-muted);
+}
+.screenshot-card-body {
+  padding: 1rem 1.2rem;
+  border-top: 1px solid var(--border);
+}
+.screenshot-card-desc {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+.screenshot-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.screenshot-card-tags span {
+  font-size: 0.68rem;
+  padding: 3px 8px;
+  border-radius: 3px;
+  background: var(--accent-light);
+  color: var(--accent);
+  border: 1px solid var(--accent-border);
+  font-weight: 500;
 }
 .screenshot-slider {
   position: relative;
@@ -1625,6 +1654,12 @@
           <button class="ss-dot"></button>
           <button class="ss-dot"></button>
         </div>
+        <div class="screenshot-card-body">
+          <p class="screenshot-card-desc">AIによる求人票自動生成・法令チェック・フォーマット変換を統合したMonorepo型SaaS。5つのマイクロアプリをTurborepoで一元管理。</p>
+          <div class="screenshot-card-tags">
+            <span>Next.js 15</span><span>Supabase</span><span>Claude AI</span><span>Turborepo</span><span>TypeScript</span>
+          </div>
+        </div>
       </div>
       <!-- CrossBot -->
       <div class="screenshot-card reveal reveal-delay-1">
@@ -1649,6 +1684,12 @@
           <button class="ss-dot"></button>
           <button class="ss-dot"></button>
         </div>
+        <div class="screenshot-card-body">
+          <p class="screenshot-card-desc">ビジュアルシナリオエディタでBot構築からリアルタイム有人エスカレーションまで統合するマルチテナント対応SaaS。</p>
+          <div class="screenshot-card-tags">
+            <span>React 18</span><span>NestJS</span><span>Socket.IO</span><span>Redis</span><span>Docker</span>
+          </div>
+        </div>
       </div>
       <!-- cross2B-Pro -->
       <div class="screenshot-card reveal reveal-delay-2">
@@ -1670,6 +1711,12 @@
           <button class="ss-dot ss-active"></button>
           <button class="ss-dot"></button>
           <button class="ss-dot"></button>
+        </div>
+        <div class="screenshot-card-body">
+          <p class="screenshot-card-desc">Temporal Workflowsで構築した19ステップのSEO記事完全自動生成パイプライン。キーワード入力から記事完成まで全自動。</p>
+          <div class="screenshot-card-tags">
+            <span>FastAPI</span><span>Temporal</span><span>Next.js 14</span><span>PostgreSQL</span><span>Docker</span>
+          </div>
         </div>
       </div>
     </div>
@@ -1981,8 +2028,8 @@
     var grid = document.getElementById('projectsGrid');
     var showMoreWrapper = document.getElementById('showMoreWrapper');
     var filteredProjects = currentFilter === 'all'
-      ? PROJECTS
-      : PROJECTS.filter(function(p) { return p.cat === currentFilter; });
+      ? PROJECTS.filter(function(p) { return !p.featured; })
+      : PROJECTS.filter(function(p) { return p.cat === currentFilter && !p.featured; });
 
     grid.innerHTML = '';
 
