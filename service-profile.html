@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<!--
+  印刷手順:
+  1. Chrome でこのファイルを開く
+  2. Cmd+P (Mac) / Ctrl+P (Win) で印刷ダイアログを開く
+  3. 「送信先」を PDF またはプリンタに設定
+  4. 「詳細設定」→「背景のグラフィック」を ON にする
+  5. 「余白」を「なし」に設定
+  6. 印刷 / 保存
+-->
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>中野 真熙 - サービス紹介資料</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 9.5pt;
+      line-height: 1.65;
+      color: #1e293b;
+      background: #e2e8f0;
+    }
+
+    /* ===== Page Layout ===== */
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      background: #ffffff;
+      margin: 10mm auto;
+      padding: 15mm 18mm;
+      position: relative;
+    }
+
+    /* ===== Print Settings ===== */
+    @page {
+      size: A4 portrait;
+      margin: 15mm 18mm;
+    }
+
+    @media print {
+      body {
+        background: none;
+      }
+      .page {
+        width: 100%;
+        min-height: auto;
+        margin: 0;
+        padding: 0;
+        page-break-after: always;
+        box-shadow: none;
+      }
+      .page:last-child {
+        page-break-after: avoid;
+      }
+    }
+
+    /* ===== Header Band ===== */
+    .header-band {
+      background: linear-gradient(135deg, #1a3a6e 0%, #1a56db 100%);
+      color: #ffffff;
+      padding: 14mm 18mm 12mm;
+      margin: -15mm -18mm 8mm;
+      page-break-inside: avoid;
+      break-after: avoid;
+    }
+
+    .header-name-ja {
+      font-size: 22pt;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      line-height: 1.2;
+    }
+
+    .header-name-en {
+      font-size: 11pt;
+      font-weight: 400;
+      opacity: 0.88;
+      margin-left: 4pt;
+    }
+
+    .header-title {
+      font-size: 10pt;
+      font-weight: 500;
+      margin-top: 3pt;
+      opacity: 0.92;
+    }
+
+    .header-roles {
+      font-size: 9pt;
+      opacity: 0.82;
+      margin-top: 2pt;
+    }
+
+    .header-url {
+      font-size: 8.5pt;
+      opacity: 0.75;
+      margin-top: 4pt;
+      font-weight: 400;
+    }
+
+    .header-url a {
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    /* ===== Section Titles ===== */
+    .section {
+      page-break-inside: avoid;
+      margin-bottom: 7mm;
+    }
+
+    .section-title {
+      font-size: 11pt;
+      font-weight: 700;
+      color: #1a56db;
+      border-bottom: 2px solid #1a56db;
+      padding-bottom: 2pt;
+      margin-bottom: 5mm;
+      break-after: avoid;
+    }
+
+    /* ===== 4-Card Grid ===== */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm;
+      margin-bottom: 6mm;
+      page-break-inside: avoid;
+    }
+
+    .card {
+      border-left: 3px solid #1a56db;
+      background: #f8faff;
+      padding: 4mm 5mm;
+      page-break-inside: avoid;
+    }
+
+    .card-title {
+      font-size: 9.5pt;
+      font-weight: 700;
+      color: #1a3a6e;
+      margin-bottom: 2pt;
+    }
+
+    .card-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .card-list li {
+      font-size: 8.5pt;
+      color: #334155;
+      line-height: 1.6;
+      padding-left: 8pt;
+      position: relative;
+    }
+
+    .card-list li::before {
+      content: "•";
+      color: #1a56db;
+      position: absolute;
+      left: 0;
+    }
+
+    /* ===== Profile Text ===== */
+    .profile-text {
+      font-size: 9pt;
+      color: #334155;
+      line-height: 1.75;
+      background: #f8faff;
+      border-left: 3px solid #1a56db;
+      padding: 4mm 5mm;
+      page-break-inside: avoid;
+    }
+
+    /* ===== Tables ===== */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8.5pt;
+      page-break-inside: avoid;
+      margin-bottom: 5mm;
+    }
+
+    .data-table thead tr {
+      background: #1a56db;
+      color: #ffffff;
+    }
+
+    .data-table thead th {
+      padding: 3.5pt 5pt;
+      text-align: left;
+      font-weight: 500;
+      font-size: 8.5pt;
+    }
+
+    .data-table tbody tr {
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .data-table tbody tr:nth-child(even) {
+      background: #f8faff;
+    }
+
+    .data-table tbody td {
+      padding: 3.5pt 5pt;
+      vertical-align: top;
+      color: #1e293b;
+    }
+
+    /* ===== Bullet Lists ===== */
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 5mm;
+    }
+
+    .feature-list li {
+      font-size: 9pt;
+      color: #334155;
+      line-height: 1.7;
+      padding: 2pt 0 2pt 14pt;
+      position: relative;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .feature-list li::before {
+      content: "▶";
+      color: #1a56db;
+      font-size: 7pt;
+      position: absolute;
+      left: 0;
+      top: 4pt;
+    }
+
+    /* ===== Project Cards (Page 3) ===== */
+    .project-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 4mm;
+      page-break-inside: avoid;
+      margin-bottom: 5mm;
+    }
+
+    .project-card {
+      border-left: 3px solid #1a56db;
+      background: #f8faff;
+      padding: 4mm 5mm;
+    }
+
+    .project-card-name {
+      font-size: 9.5pt;
+      font-weight: 700;
+      color: #1a3a6e;
+      margin-bottom: 3pt;
+    }
+
+    .project-card-desc {
+      font-size: 8pt;
+      color: #475569;
+      line-height: 1.65;
+    }
+
+    /* ===== Sub-section title ===== */
+    .subsection-title {
+      font-size: 9.5pt;
+      font-weight: 700;
+      color: #1a3a6e;
+      margin: 5mm 0 3mm;
+      padding-left: 6pt;
+      border-left: 3px solid #93c5fd;
+      break-after: avoid;
+    }
+
+    /* ===== Credential / Qualification row ===== */
+    .credential-row {
+      font-size: 8.5pt;
+      color: #475569;
+      margin-bottom: 5mm;
+      line-height: 1.8;
+      page-break-inside: avoid;
+    }
+
+    .credential-label {
+      font-weight: 700;
+      color: #1a3a6e;
+      display: inline-block;
+      margin-right: 6pt;
+    }
+
+    /* ===== Footer Band ===== */
+    .footer-band {
+      background: #f1f5f9;
+      border-top: 2px solid #1a56db;
+      padding: 5mm 6mm;
+      margin: 4mm -18mm -15mm;
+      page-break-inside: avoid;
+    }
+
+    .footer-band p {
+      font-size: 8.5pt;
+      color: #475569;
+      line-height: 1.7;
+    }
+
+    .footer-band a {
+      color: #1a56db;
+      text-decoration: none;
+    }
+
+    .footer-band .update-note {
+      font-size: 8pt;
+      color: #94a3b8;
+      margin-top: 2pt;
+    }
+
+    /* ===== Page number helper ===== */
+    .page-label {
+      position: absolute;
+      top: 8mm;
+      right: 18mm;
+      font-size: 7.5pt;
+      color: #94a3b8;
+    }
+
+    /* ===== Spacing utilities ===== */
+    .mt-4 { margin-top: 4mm; }
+    .mb-4 { margin-bottom: 4mm; }
+  </style>
+</head>
+<body>
+
+<!-- ============================
+     PAGE 1: Profile + Overview
+     ============================ -->
+<div class="page">
+  <div class="page-label">1 / 3</div>
+
+  <!-- Header Band -->
+  <div class="header-band">
+    <div class="header-name-ja">中野 真熙 <span class="header-name-en">Masaki Nakano</span></div>
+    <div class="header-title">株式会社M.erci 代表取締役</div>
+    <div class="header-roles">AIエンジニア&nbsp;&nbsp;/&nbsp;&nbsp;研修講師&nbsp;&nbsp;/&nbsp;&nbsp;業務設計&nbsp;&nbsp;/&nbsp;&nbsp;導入支援</div>
+    <div class="header-url">Portfolio: <a href="https://masaki-portfolio.pages.dev">https://masaki-portfolio.pages.dev</a></div>
+  </div>
+
+  <!-- 対応可能領域の全体像 -->
+  <div class="section">
+    <div class="section-title">対応可能領域の全体像</div>
+
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-title">研修講師・登壇</div>
+        <ul class="card-list">
+          <li>新入社員研修、AI活用研修、プログラミング研修</li>
+          <li>実践型設計で「聞いて終わり」にならない指導</li>
+          <li>大手企業から中小企業まで対応可能</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">研修設計・教材作成</div>
+        <ul class="card-list">
+          <li>カリキュラム設計、演習設計、教材作成</li>
+          <li>受講者レベルに合わせた段階的構成</li>
+          <li>進行改善・振り返り設計まで一貫対応</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">AI活用・業務改善</div>
+        <ul class="card-list">
+          <li>AIツール導入支援・コーチング</li>
+          <li>業務フローの仕組み化・自動化設計</li>
+          <li>現場に定着する運用設計</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">開発・構築支援</div>
+        <ul class="card-list">
+          <li>Webアプリケーション開発</li>
+          <li>業務システム・ツールの企画〜構築</li>
+          <li>企画から運用まで一人で完結可能</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- プロフィール概要 -->
+  <div class="section">
+    <div class="section-title">プロフィール概要</div>
+    <div class="profile-text">
+      外食産業での60名規模マネジメント、人材営業での月売上1,300万円達成、新規事業立ち上げを経て独立。2026年4月に株式会社M.erciを設立。現在はAI開発・Web開発・研修講師・業務設計を一気通貫で対応。「営業・マネジメント・事業企画・開発・教育」すべてを実務で経験しているからこそ、現場に本当に役立つ提案と実装ができます。
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================
+     PAGE 2: 研修講師 + 研修設計
+     ============================ -->
+<div class="page">
+  <div class="page-label">2 / 3</div>
+
+  <!-- 研修講師・登壇実績 -->
+  <div class="section">
+    <div class="section-title">研修講師・登壇実績</div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width:34%">案件</th>
+          <th style="width:22%">対象</th>
+          <th style="width:32%">内容</th>
+          <th style="width:12%">時期・規模</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>ダイフク様 新入社員PC研修</strong></td>
+          <td>大手メーカー新入社員</td>
+          <td>Excel・Word・PowerPoint・ビジネスメールの実践研修</td>
+          <td>2026年度</td>
+        </tr>
+        <tr>
+          <td><strong>AI活用研修ワークショップ</strong></td>
+          <td>法人向け</td>
+          <td>ChatGPT・Claude等のAI活用実践ワークショップ</td>
+          <td>複数回実施</td>
+        </tr>
+        <tr>
+          <td><strong>プログラミングスクール講師</strong></td>
+          <td>小学生〜社会人</td>
+          <td>プログラミング基礎〜応用、スクール長として運営全般</td>
+          <td>2021年〜継続</td>
+        </tr>
+        <tr>
+          <td><strong>新入社員ビジネス研修</strong></td>
+          <td>企業新入社員</td>
+          <td>ビジネスマナー・報連相・目標設定・振り返り手法</td>
+          <td>複数企業</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="subsection-title">講師としての特長</div>
+    <ul class="feature-list">
+      <li><strong>「聞いて終わり」にしない</strong> — ゴール設定から実践手順・振り返りまでを一本化した研修設計</li>
+      <li><strong>受講者の主体性を引き出す</strong> — 達成感のある課題設計と成功体験の積み上げで自走力を養成</li>
+      <li><strong>初学者にも分かりやすい</strong> — 専門用語を噛み砕き、例→デモ→演習→フィードバックの流れで確実に定着</li>
+    </ul>
+  </div>
+
+  <!-- 研修設計・教材作成 -->
+  <div class="section">
+    <div class="section-title">研修設計・教材作成</div>
+
+    <ul class="feature-list">
+      <li><strong>カリキュラム設計</strong> — ゼロからの新規設計、既存研修の改善いずれにも対応</li>
+      <li><strong>演習・ワーク設計</strong> — 実務に直結する演習を中心に設計し、「使える知識」に変換</li>
+      <li><strong>教材作成</strong> — スライド、ハンドアウト、演習シート、解説資料などフルセットで対応</li>
+      <li><strong>進行表作成・タイムライン設計</strong> — 当日の進行をスムーズにする詳細なタイムライン設計</li>
+      <li><strong>受講者レベル差への対応設計</strong> — 初学者から上級者まで混在する場でも効果的な構成を実現</li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- ============================
+     PAGE 3: AI活用・開発 + 資格・Footer
+     ============================ -->
+<div class="page">
+  <div class="page-label">3 / 3</div>
+
+  <!-- AI活用・業務改善支援 -->
+  <div class="section">
+    <div class="section-title">AI活用・業務改善支援</div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width:32%">支援内容</th>
+          <th style="width:42%">具体的な取り組み</th>
+          <th style="width:26%">提供価値</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Claude Code 導入支援・コーチング</strong></td>
+          <td>AI開発ツールの導入・環境構築・活用トレーニング</td>
+          <td>開発生産性の大幅向上</td>
+        </tr>
+        <tr>
+          <td><strong>AIエージェント導入・構築支援</strong></td>
+          <td>企業向けAIエージェントの導入設計〜構築〜運用定着</td>
+          <td>業務のAI活用を実現</td>
+        </tr>
+        <tr>
+          <td><strong>OpenClaw導入支援・構築</strong></td>
+          <td>自然言語でのカレンダー操作環境の導入・構築支援</td>
+          <td>日常業務の効率化</td>
+        </tr>
+        <tr>
+          <td><strong>業務フロー設計・自動化</strong></td>
+          <td>繰り返し作業のシステム化、承認フロー構築</td>
+          <td>運用コスト削減</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 開発・構築支援（代表案件） -->
+  <div class="section">
+    <div class="section-title">開発・構築支援（代表案件）</div>
+
+    <div class="project-cards">
+      <div class="project-card">
+        <div class="project-card-name">Recruitment Studio</div>
+        <div class="project-card-desc">
+          求人票の作成・審査・法令チェック・媒体出稿を統合した業務システム。AIが求人票を自動生成し、法令違反を事前に検出。採用担当者の作業時間を大幅に短縮します。
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-card-name">CrossBot</div>
+        <div class="project-card-desc">
+          企業のカスタマーサポートを自動化するチャットボットシステム。自動応答から有人対応への切り替えをスムーズに実現し、顧客満足度と対応コストの両立を支援します。
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-card-name">cross2B-Pro</div>
+        <div class="project-card-desc">
+          SEO記事の制作工程（調査→執筆→校正→画像作成）を全自動化するシステム。記事制作のリードタイムを大幅短縮し、コンテンツ量産を実現します。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 資格 -->
+  <div class="section">
+    <div class="credential-row">
+      <span class="credential-label">保有資格</span>
+      普通自動車免許&nbsp;&nbsp;/&nbsp;&nbsp;調理師免許&nbsp;&nbsp;/&nbsp;&nbsp;食品衛生責任者&nbsp;&nbsp;/&nbsp;&nbsp;派遣元責任者&nbsp;&nbsp;/&nbsp;&nbsp;職業紹介責任者
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer-band">
+    <p>詳細な制作実績・開発実績については、ポートフォリオサイトをご参照ください。</p>
+    <p><a href="https://masaki-portfolio.pages.dev">https://masaki-portfolio.pages.dev</a></p>
+    <p class="update-note">最終更新: 2026年4月&nbsp;&nbsp;|&nbsp;&nbsp;株式会社M.erci&nbsp;&nbsp;代表取締役 中野 真熙</p>
+  </div>
+</div>
+
+</body>
+</html>

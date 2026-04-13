@@ -1,0 +1,269 @@
+<!--
+  非公開: 打ち合わせ用 参考価格メモ
+  ※ ポートフォリオやWebサイトには掲載しない
+  ※ 印刷して手元資料として使う用
+-->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>参考価格メモ（非公開）</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10pt;
+      line-height: 1.7;
+      color: #1e293b;
+      background: #e8ecf0;
+      padding: 10mm 0;
+    }
+    .page {
+      width: 210mm;
+      min-height: auto;
+      margin: 0 auto;
+      padding: 20mm 22mm;
+      background: #fff;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    }
+    @media print {
+      @page { size: A4 portrait; margin: 20mm 22mm; }
+      body { background: #fff; padding: 0; }
+      .page { box-shadow: none; margin: 0; padding: 0; }
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid #dc2626;
+    }
+    .header h1 {
+      font-size: 16pt;
+      font-weight: 700;
+      color: #dc2626;
+      margin-bottom: 4px;
+    }
+    .header p {
+      font-size: 8.5pt;
+      color: #64748b;
+    }
+    .section { margin-bottom: 24px; }
+    .section-title {
+      font-size: 11pt;
+      font-weight: 700;
+      color: #1a56db;
+      border-bottom: 1.5px solid #1a56db;
+      padding-bottom: 4px;
+      margin-bottom: 12px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9.5pt;
+    }
+    thead th {
+      background: #1a56db;
+      color: #fff;
+      padding: 8px 12px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 8.5pt;
+    }
+    thead th:first-child { border-radius: 4px 0 0 0; }
+    thead th:last-child { border-radius: 0 4px 0 0; }
+    tbody td {
+      padding: 8px 12px;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: top;
+    }
+    tbody tr:nth-child(even) { background: #f8fafc; }
+    .price {
+      font-weight: 700;
+      color: #1e293b;
+      white-space: nowrap;
+    }
+    .note {
+      font-size: 8.5pt;
+      color: #64748b;
+      line-height: 1.6;
+    }
+    .warning-box {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-left: 4px solid #dc2626;
+      padding: 12px 16px;
+      border-radius: 0 4px 4px 0;
+      margin-bottom: 20px;
+    }
+    .warning-box p {
+      font-size: 9pt;
+      color: #991b1b;
+      line-height: 1.6;
+    }
+    .tip-box {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-left: 4px solid #1a56db;
+      padding: 12px 16px;
+      border-radius: 0 4px 4px 0;
+      margin-top: 16px;
+    }
+    .tip-box p {
+      font-size: 9pt;
+      color: #1e40af;
+      line-height: 1.6;
+    }
+    .footer {
+      margin-top: 24px;
+      padding-top: 12px;
+      border-top: 1px solid #e2e8f0;
+      font-size: 7.5pt;
+      color: #94a3b8;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <h1>参考価格メモ（非公開・社内用）</h1>
+    <p>中野 真熙 / 株式会社M.erci — 2026年4月時点</p>
+  </div>
+
+  <div class="warning-box">
+    <p>本資料は社内参考用です。クライアントへそのまま提出しないでください。<br>
+    実際の見積もりは案件ごとに個別作成します。</p>
+  </div>
+
+  <!-- 研修・講師 -->
+  <div class="section">
+    <h2 class="section-title">研修講師・登壇</h2>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:35%">区分</th>
+          <th style="width:25%">参考単価</th>
+          <th style="width:40%">備考</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1日研修登壇（6-8時間）</td>
+          <td class="price">32,000円〜</td>
+          <td class="note">ダイフク様案件ベース。内容・準備量で変動。</td>
+        </tr>
+        <tr>
+          <td>半日研修登壇（3-4時間）</td>
+          <td class="price">24,000円〜</td>
+          <td class="note">同上。午前 or 午後のみの場合。</td>
+        </tr>
+        <tr>
+          <td>研修設計・カリキュラム作成</td>
+          <td class="price">要見積</td>
+          <td class="note">新規設計: 5-15万円目安（規模による）。改善案件はこれより低め。</td>
+        </tr>
+        <tr>
+          <td>教材・演習シート作成</td>
+          <td class="price">要見積</td>
+          <td class="note">工数ベース。スライド1セット: 3-8万円目安。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- AI導入支援 -->
+  <div class="section">
+    <h2 class="section-title">AI活用・導入支援・コーチング</h2>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:35%">区分</th>
+          <th style="width:25%">参考単価</th>
+          <th style="width:40%">備考</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>AI導入コンサルティング（単発）</td>
+          <td class="price">30,000〜50,000円/回</td>
+          <td class="note">2-3時間のヒアリング+提案。業務分析・導入計画の初期設計。</td>
+        </tr>
+        <tr>
+          <td>AI活用コーチング（継続）</td>
+          <td class="price">要見積</td>
+          <td class="note">月2-4回のセッション。ツール定着まで伴走。月額5-15万円目安。</td>
+        </tr>
+        <tr>
+          <td>AI活用研修（1日）</td>
+          <td class="price">50,000〜80,000円</td>
+          <td class="note">ChatGPT/Claude等の実践ワークショップ。教材込み。</td>
+        </tr>
+        <tr>
+          <td>業務フロー設計・自動化支援</td>
+          <td class="price">要見積</td>
+          <td class="note">案件規模による。小規模: 10-30万円、中規模: 30-80万円目安。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 開発 -->
+  <div class="section">
+    <h2 class="section-title">開発・構築支援</h2>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:35%">区分</th>
+          <th style="width:25%">参考単価</th>
+          <th style="width:40%">備考</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Webアプリ開発（小規模）</td>
+          <td class="price">30〜80万円</td>
+          <td class="note">1-2ヶ月程度。管理画面・フォーム・API連携等。</td>
+        </tr>
+        <tr>
+          <td>Webアプリ開発（中規模）</td>
+          <td class="price">80〜200万円</td>
+          <td class="note">2-4ヶ月程度。複数機能・AI統合・ユーザー管理等。</td>
+        </tr>
+        <tr>
+          <td>ツール開発（単機能）</td>
+          <td class="price">10〜30万円</td>
+          <td class="note">業務効率化ツール、データ処理スクリプト等。</td>
+        </tr>
+        <tr>
+          <td>保守・運用サポート</td>
+          <td class="price">月額 3〜10万円</td>
+          <td class="note">稼働中システムの保守・改善。対応量による。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tip-box">
+    <p><strong>打ち合わせ時の伝え方:</strong><br>
+    「直近の登壇案件では1日32,000円でお受けしています。案件の内容や条件によって調整できますので、まずはご相談ベースで一緒にすり合わせできればと思います。」</p>
+  </div>
+
+  <div class="tip-box">
+    <p><strong>価格を聞かれた時の基本方針:</strong><br>
+    ① まず相手の予算感を聞く<br>
+    ② 自分から値下げは切り出さない<br>
+    ③ 「案件によって異なります」で逃げすぎない — 目安は具体的に出す<br>
+    ④ 研修+設計+教材のセット提案で単価アップを狙う</p>
+  </div>
+
+  <div class="footer">
+    <p>本資料は非公開です。ポートフォリオ・Webサイトには掲載しません。</p>
+    <p>作成日: 2026年4月 / 中野 真熙 / 株式会社M.erci</p>
+  </div>
+
+</div>
+</body>
+</html>
