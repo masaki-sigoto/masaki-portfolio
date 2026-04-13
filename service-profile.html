@@ -70,10 +70,16 @@
     .header-band {
       background: linear-gradient(135deg, #1a3a6e 0%, #1a56db 100%);
       color: #ffffff;
-      padding: 12mm 18mm 10mm;
+      padding: 16mm 18mm 10mm;
       margin: -15mm -18mm 7mm;
       page-break-inside: avoid;
       break-after: avoid;
+    }
+    @media print {
+      .header-band {
+        padding: 8mm 10mm 8mm;
+        margin: 0 0 7mm;
+      }
     }
 
     .header-name-row {
